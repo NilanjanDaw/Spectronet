@@ -2,7 +2,7 @@
 # @Date:   2018-11-22T14:28:53+05:30
 # @Email:  atulsahay01@gmail.com
 # @Last modified by:   atul
-# @Last modified time: 2018-11-22T15:26:10+05:30
+# @Last modified time: 2018-11-22T16:14:33+05:30
 
 import os
 import matplotlib.pyplot as plt
@@ -13,7 +13,7 @@ import numpy as np
 # Note : First Create a folder name spectrogram under the  directory where the python
 #        file is kept
 
-def spectrogram(filename):
+def spectrogram(filename,dLen):
 
     sample_rate, samples = wavfile.read(filename)
     np.set_printoptions(threshold=np.inf)
@@ -27,7 +27,7 @@ def spectrogram(filename):
     for i in range(len(frequencies)):
         if frequencies[i] > np.mean(frequencies):
             frequencies[i] = 0
-            
+
     fig = plt.figure(figsize=(3.60, 3.60), dpi=100)
     ax = fig.add_subplot(1,1,1)
     plt.axis('off')
@@ -35,7 +35,7 @@ def spectrogram(filename):
     plt.imshow(spectrogram)
 
     plt.ylim(30, 0)
-    path="spectrogram/"+filename[6:-4]+".png"
+    path="spectrogram/"+filename[dLen+1:-4]+".png"
     print(path)
     extent = ax.get_window_extent().transformed(fig.dpi_scale_trans.inverted())
     plt.savefig(path,dpi=100,bbox_inches=extent,pad_inches=0)
@@ -44,6 +44,7 @@ def spectrogram(filename):
 # Note: This directory contains all the .wav files
 
 directory = 'train'
+dLen = len(directory)
 
 for filename in os.listdir(directory):
     # print("filename"+str(filename))
@@ -51,6 +52,6 @@ for filename in os.listdir(directory):
         # print("dir: "+str(directory))
         path = directory+"/"+filename
         # print("path "+str(path))
-        spectrogram(path)
+        spectrogram(path,dLen)
     else:
         pass
