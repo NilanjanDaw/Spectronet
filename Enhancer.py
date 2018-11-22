@@ -2,11 +2,12 @@
 # @Date:   2018-11-22T14:22:47+05:30
 # @Email:  atulsahay01@gmail.com
 # @Last modified by:   atul
-# @Last modified time: 2018-11-22T16:40:31+05:30
+# @Last modified time: 2018-11-22T18:06:54+05:30
 
 import cv2
 import numpy as np
 import PIL as p
+from PIL import ImageEnhance
 
 def butter_lowpass(cutoff, fs, order=5):
      nyq = 0.5 * fs
@@ -28,17 +29,17 @@ def sharpness_value(PILimage):
 
     return sharpness_messure
 
-def sharpness(imageName,OUTPUT):
-    image = p.IMage.open(ImageName)
-    enhancer = p.ImageEnhance.Sharpness(image)
-    factor = 15 # how much shaprness we needed
+def sharpness(ImageName,OUTPUT):
+    image = p.Image.open(ImageName)
+    enhancer = ImageEnhance.Sharpness(image)
+    factor = 11 # how much shaprness we needed
     ## TODO:  Will make it adaptive
     factor/=sharpness_value(image)
     enhancedImage = enhancer.enhance(factor)
-    enhancedImage.save(OUPUT)
+    enhancedImage.save(OUTPUT)
 
 
-def gamma_correction(imageName,OUTPUT,sensitivity=0.4):
+def gamma_correction(ImageName,OUTPUT,sensitivity=0.4):
     image_v = cv2.imread(ImageName)
     image_v = image_v/255.0
     gamma_corrected_image = cv2.pow(image_v,sensitivity)
