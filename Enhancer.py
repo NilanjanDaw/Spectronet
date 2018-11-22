@@ -2,7 +2,7 @@
 # @Date:   2018-11-22T14:22:47+05:30
 # @Email:  atulsahay01@gmail.com
 # @Last modified by:   atul
-# @Last modified time: 2018-11-22T18:06:54+05:30
+# @Last modified time: 2018-11-22T19:23:03+05:30
 
 import cv2
 import numpy as np
@@ -43,6 +43,8 @@ def gamma_correction(ImageName,OUTPUT,sensitivity=0.4):
     image_v = cv2.imread(ImageName)
     image_v = image_v/255.0
     gamma_corrected_image = cv2.pow(image_v,sensitivity)
+    gamma_corrected_image*=255
+    gamma_corrected_image = gamma_corrected_image.astype(np.uint8)
     # cv2.imshow('Original Image',image_v)
     # cv2.imshow('Power Law Transformation',gamma_corrected_image)
     # cv2.waitKey(0)
