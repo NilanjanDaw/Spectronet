@@ -2,7 +2,7 @@
 # @Date:   2018-11-22T14:22:47+05:30
 # @Email:  atulsahay01@gmail.com
 # @Last modified by:   atul
-# @Last modified time: 2018-11-22T16:22:23+05:30
+# @Last modified time: 2018-11-22T16:40:31+05:30
 
 import cv2
 import numpy as np
@@ -19,11 +19,21 @@ def butter_lowpass_filter(data, cutoff, fs, order=5):
      y = signal.lfilter(b, a, data)
      return y
 
+def sharpness_value(PILimage):
+    gray = PILimage.convert('L') # grayscale
+    pixels = np.asarray(gray, dtype=np.int32)
+    gy, gx = np.gradient(pixels)
+    gnorm = np.sqrt(gx**2 + gy**2)
+    sharpness_messure = np.average(gnorm)
+
+    return sharpness_messure
+
 def sharpness(imageName,OUTPUT):
     image = p.IMage.open(ImageName)
     enhancer = p.ImageEnhance.Sharpness(image)
-    factor = 2 # how much shaprness we needed
+    factor = 15 # how much shaprness we needed
     ## TODO:  Will make it adaptive
+    factor/=sharpness_value(image)
     enhancedImage = enhancer.enhance(factor)
     enhancedImage.save(OUPUT)
 
