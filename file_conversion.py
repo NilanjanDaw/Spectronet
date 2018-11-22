@@ -2,7 +2,7 @@
 # @Date:   2018-11-22T14:28:53+05:30
 # @Email:  atulsahay01@gmail.com
 # @Last modified by:   nilanjan
-# @Last modified time: 2018-11-22T18:24:16+05:30
+# @Last modified time: 2018-11-22T19:01:54+05:30
 
 import os
 import matplotlib.pyplot as plt
@@ -35,7 +35,7 @@ def spectrogram(filename,dLen):
     plt.imshow(spectrogram)
 
     plt.ylim(30, 0)
-    path="spectrogram/"+filename[dLen+1:-4]+".png"
+    path="validation/"+filename[dLen+1:-4]+".png"
     print(path)
     extent = ax.get_window_extent().transformed(fig.dpi_scale_trans.inverted())
     plt.savefig(path,dpi=100,bbox_inches=extent,pad_inches=0)
@@ -43,7 +43,7 @@ def spectrogram(filename,dLen):
 
 # Note: This directory contains all the .wav files
 
-directory = 'train'
+directory = 'validation_raw'
 dLen = len(directory)
 
 for filename in os.listdir(directory):
