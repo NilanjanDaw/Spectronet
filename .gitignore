@@ -114,3 +114,5 @@ training
 *.zip
 dataset/
 logs/
+adaptive_sharpened_train
+*.tar*

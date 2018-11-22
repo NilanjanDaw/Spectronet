@@ -3,7 +3,7 @@
 # @Email:  nilanjandaw@gmail.com
 # @Filename: spectronet.py
 # @Last modified by:   nilanjan
-# @Last modified time: 2018-11-22T18:19:22+05:30
+# @Last modified time: 2018-11-22T18:32:16+05:30
 # @Copyright: Nilanjan Daw
 from keras import layers, models
 from keras.preprocessing.image import ImageDataGenerator
@@ -11,8 +11,8 @@ from keras.preprocessing import image
 from keras import optimizers
 from keras import callbacks
 import csv
-import os, shutil
-
+import os
+import shutil
 
 
 def makeTrainDataset():
@@ -35,6 +35,7 @@ def makeTrainDataset():
                     dst = abnormal + filename
                     shutil.move(src, dst)
 
+
 def makeValidationDataset():
     base_dir = 'validation/'
     normal = base_dir + "normal/"
@@ -54,6 +55,7 @@ def makeValidationDataset():
                 if os.path.isfile(src):
                     dst = abnormal + filename
                     shutil.move(src, dst)
+
 
 def defineModel():
     model = models.Sequential()
@@ -77,6 +79,7 @@ def defineModel():
     model.compile(loss='binary_crossentropy',
                   optimizer=optimizers.RMSprop(lr=0.04), metrics=['acc'])
     return model
+
 
 print("Compiling model...")
 model = defineModel()
@@ -113,8 +116,9 @@ validation_generator = validation_datagen.flow_from_directory(
 )
 
 csv_logger = callbacks.CSVLogger('log.csv', append=True, separator=';')
-filepath="weights/weights-{epoch:02d}-{val_acc:.2f}.hdf5"
-checkpoint = callbacks.ModelCheckpoint(filepath, monitor='val_acc', save_best_only=True, mode='max')
+filepath = "weights/weights-{epoch:02d}-{val_acc:.2f}.hdf5"
+checkpoint = callbacks.ModelCheckpoint(
+    filepath, monitor='val_acc', save_best_only=True, mode='max')
 tensorboard = callbacks.TensorBoard(log_dir='./logs', histogram_freq=0, batch_size=32, write_graph=True,
                                     write_grads=False, write_images=True, embeddings_freq=0,
                                     embeddings_layer_names=None, embeddings_metadata=None)

@@ -1,8 +1,8 @@
 # @Author: Atul Sahay <atul>
 # @Date:   2018-11-22T14:28:53+05:30
 # @Email:  atulsahay01@gmail.com
-# @Last modified by:   atul
-# @Last modified time: 2018-11-22T18:06:26+05:30
+# @Last modified by:   nilanjan
+# @Last modified time: 2018-11-22T19:01:37+05:30
 
 import os
 import matplotlib.pyplot as plt
@@ -17,9 +17,9 @@ import Enhancer as enh
 
 def image_enhancement(filename,dlen):
     #Output for gamma_correction
-    OUTPUT = "gamma_corrected_train/"+filename[dLen+1:-4]+".png"
-    print("OUTPUT : ",OUTPUT)
-    enh.gamma_correction(filename,OUTPUT,0.6)
+    # OUTPUT = "gamma_corrected_train/"+filename[dLen+1:-4]+".png"
+    # print("OUTPUT : ",OUTPUT)
+    # enh.gamma_correction(filename,OUTPUT,0.6)
     OUTPUT = "adaptive_sharpened_train/"+filename[dLen+1:-4]+".png"
     print("OUTPUT : ",OUTPUT)
     enh.sharpness(filename,OUTPUT)
@@ -27,11 +27,11 @@ def image_enhancement(filename,dlen):
 
 
 
-directory = 'training'
+directory = 'validation'
 dLen = len(directory)
 
 for filename in os.listdir(directory):
-    # print("filename"+str(filename))
+    print("filename"+str(filename))
     if filename.endswith(".png"):
         # print("dir: "+str(directory))
         path = directory+"/"+filename
