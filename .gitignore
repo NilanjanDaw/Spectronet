@@ -110,5 +110,7 @@ validation/
 validation_raw/
 train/
 heartbeat-sounds/
-validation.*
-training.*
+training
+*.zip
+dataset/
+logs/

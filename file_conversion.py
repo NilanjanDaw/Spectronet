@@ -3,7 +3,7 @@
 # @Email:  nilanjandaw@gmail.com
 # @Filename: file_conversion.py
 # @Last modified by:   nilanjan
-# @Last modified time: 2018-11-22T15:19:10+05:30
+# @Last modified time: 2018-11-22T16:12:44+05:30
 # @Copyright: Nilanjan Daw
 
 
@@ -14,7 +14,7 @@ from scipy import signal
 from scipy.io import wavfile
 import numpy as np
 
-def spectrogram(filename):
+def spectrogram(filename,dLength):
 
     sample_rate, samples = wavfile.read(filename)
     np.set_printoptions(threshold=np.inf)
@@ -57,21 +57,21 @@ def spectrogram(filename):
     # plt.ylabel('Frequency [Hz]')
     # plt.xlabel('Time [sec]')
     plt.ylim(30, 0)
-    path="spectrogram/"+filename[6:-4]+".png"
-    print(path)
+    path="validation/"+filename[dLength+1:-4]+".png"
+    print("pathName ",path)
     extent = ax.get_window_extent().transformed(fig.dpi_scale_trans.inverted())
     plt.savefig(path,dpi=100,bbox_inches=extent,pad_inches=0)
     plt.close('all')
 
 
-directory = 'train'
-
+directory = 'validation_raw'
+dlength = len(directory)
 for filename in os.listdir(directory):
     # print("filename"+str(filename))
     if filename.endswith(".wav"):
         # print("dir: "+str(directory))
         path = directory+"/"+filename
         # print("path "+str(path))
-        spectrogram(path)
+        spectrogram(path,dlength)
     else:
         pass
