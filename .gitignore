@@ -105,5 +105,10 @@ venv.bak/
 
 spectrogram/
 training/
+training_raw/
+validation/
+validation_raw/
 train/
 heartbeat-sounds/
+validation.*
+training.*
