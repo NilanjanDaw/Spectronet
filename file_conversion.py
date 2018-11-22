@@ -1,3 +1,13 @@
+# @Author: nilanjan
+# @Date:   2018-11-20T19:23:59+05:30
+# @Email:  nilanjandaw@gmail.com
+# @Filename: file_conversion.py
+# @Last modified by:   nilanjan
+# @Last modified time: 2018-11-22T15:19:10+05:30
+# @Copyright: Nilanjan Daw
+
+
+
 import os
 import matplotlib.pyplot as plt
 from scipy import signal
@@ -38,7 +48,7 @@ def spectrogram(filename):
         if frequencies[i] > np.mean(frequencies):
             frequencies[i] = 0
     # print(frequencies)
-    # spectrogram = spectrogram * 100000
+    # spectrogram = spectrogram * 100000modelsmodelsmodelsmmodelsodels
     fig = plt.figure(figsize=(3.60, 3.60), dpi=100)
     ax = fig.add_subplot(1,1,1)
     plt.axis('off')
@@ -51,13 +61,17 @@ def spectrogram(filename):
     print(path)
     extent = ax.get_window_extent().transformed(fig.dpi_scale_trans.inverted())
     plt.savefig(path,dpi=100,bbox_inches=extent,pad_inches=0)
+    plt.close('all')
 
 
 directory = 'train'
 
 for filename in os.listdir(directory):
+    # print("filename"+str(filename))
     if filename.endswith(".wav"):
+        # print("dir: "+str(directory))
         path = directory+"/"+filename
+        # print("path "+str(path))
         spectrogram(path)
     else:
         pass
