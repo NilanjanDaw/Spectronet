@@ -3,8 +3,9 @@
 # @Email:  nilanjandaw@gmail.com
 # @Filename: spectronet.py
 # @Last modified by:   nilanjan
-# @Last modified time: 2018-11-22T18:32:16+05:30
+# @Last modified time: 2018-11-22T23:09:30+05:30
 # @Copyright: Nilanjan Daw
+
 from keras import layers, models
 from keras.preprocessing.image import ImageDataGenerator
 from keras.preprocessing import image
@@ -63,9 +64,12 @@ def defineModel():
                             input_shape=(240, 360, 3)))
     model.add(layers.MaxPool2D(2, 2))
     model.add(layers.Conv2D(64, (3, 3), activation='relu'))
+    model.add(layers.Conv2D(64, (3, 3), activation='relu'))
     model.add(layers.MaxPool2D(2, 2))
     model.add(layers.Conv2D(128, (3, 3), activation='relu'))
+    model.add(layers.Conv2D(128, (3, 3), activation='relu'))
     model.add(layers.MaxPool2D(2, 2))
+    model.add(layers.Conv2D(128, (3, 3), activation='relu'))
     model.add(layers.Conv2D(128, (3, 3), activation='relu'))
     model.add(layers.MaxPool2D(2, 2))
     model.add(layers.Flatten())
@@ -73,7 +77,6 @@ def defineModel():
     model.add(layers.Dense(512, activation='relu'))
     model.add(layers.Dense(512, activation='relu'))
     model.add(layers.Dense(1, activation='sigmoid'))
-
     print(model.summary())
 
     model.compile(loss='binary_crossentropy',
@@ -125,7 +128,7 @@ tensorboard = callbacks.TensorBoard(log_dir='./logs', histogram_freq=0, batch_si
 history = model.fit_generator(
     train_generator,
     steps_per_epoch=100,
-    epochs=100,
+    epochs=5,
     validation_data=validation_generator,
     validation_steps=50,
     callbacks=[csv_logger, tensorboard, checkpoint]

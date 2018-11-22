@@ -116,3 +116,5 @@ dataset/
 logs/
 adaptive_sharpened_train
 *.tar*
+weights*/
+*.h5
